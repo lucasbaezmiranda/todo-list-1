@@ -8,7 +8,7 @@ function AddTaskForm({ onTaskAdded }) {
     e.preventDefault();
     if (!title.trim()) return;
 
-    axios.post('http://todo-list-env.eba-ny4hgubn.us-west-2.elasticbeanstalk.com/todos/', { title })
+    axios.post('https://todo-list-env.eba-ny4hgubn.us-west-2.elasticbeanstalk.com/todos/', { title })
       .then(response => {
         onTaskAdded(response.data);
         setTitle('');
