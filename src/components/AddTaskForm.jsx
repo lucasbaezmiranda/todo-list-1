@@ -8,7 +8,7 @@ function AddTaskForm({ onTaskAdded }) {
     e.preventDefault();
     if (!title.trim()) return;
 
-    axios.post('http://127.0.0.1:8000/todos/', { title })
+    axios.post('https://tu-backend-env.us-west-2.elasticbeanstalk.com/todos/', { title })
       .then(response => {
         onTaskAdded(response.data);
         setTitle('');

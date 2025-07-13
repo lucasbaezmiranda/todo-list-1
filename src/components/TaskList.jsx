@@ -6,7 +6,7 @@ function TaskList() {
   const [tasks, setTasks] = useState([]);
 
   const fetchTasks = () => {
-    axios.get('http://127.0.0.1:8000/todos/')
+    axios.get('https://tu-backend-env.us-west-2.elasticbeanstalk.com/todos/')
       .then(response => setTasks(response.data))
       .catch(error => console.error('Error fetching tasks:', error));
   };
@@ -20,7 +20,7 @@ function TaskList() {
   };
 
   const toggleTaskDone = (id, done) => {
-    axios.patch(`http://127.0.0.1:8000/todos/${id}`, { done: !done })
+    axios.patch(`https://tu-backend-env.us-west-2.elasticbeanstalk.com/todos/${id}`, { done: !done })
       .then(response => {
         setTasks(prevTasks =>
           prevTasks.map(task =>
@@ -32,7 +32,7 @@ function TaskList() {
   };
 
   const deleteTask = (id) => {
-    axios.delete(`http://127.0.0.1:8000/todos/${id}`)
+    axios.delete(`https://tu-backend-env.us-west-2.elasticbeanstalk.com/todos/${id}`)
       .then(() => {
         setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
       })
