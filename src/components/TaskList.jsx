@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AddTaskForm from './AddTaskForm';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 function TaskList() {
   const [tasks, setTasks] = useState([]);
 
   const fetchTasks = () => {
-    axios.get('https://todo-list-env.eba-ny4hgubn.us-west-2.elasticbeanstalk.com/todos/')
+    axios.get(`${BASE_URL}/todos/`)
       .then(response => setTasks(response.data))
       .catch(error => console.error('Error fetching tasks:', error));
   };
@@ -20,7 +22,7 @@ function TaskList() {
   };
 
   const toggleTaskDone = (id, done) => {
-    axios.patch(`https://todo-list-env.eba-ny4hgubn.us-west-2.elasticbeanstalk.com/todos/${id}`, { done: !done })
+    axios.patch(`${BASE_URL}/todos/${id}`, { done: !done })
       .then(response => {
         setTasks(prevTasks =>
           prevTasks.map(task =>
@@ -32,7 +34,7 @@ function TaskList() {
   };
 
   const deleteTask = (id) => {
-    axios.delete(`https://todo-list-env.eba-ny4hgubn.us-west-2.elasticbeanstalk.com/todos/${id}`)
+    axios.delete(`${BASE_URL}/todos/${id}`)
       .then(() => {
         setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
       })

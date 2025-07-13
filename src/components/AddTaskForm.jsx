@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 function AddTaskForm({ onTaskAdded }) {
   const [title, setTitle] = useState('');
 
@@ -8,7 +10,7 @@ function AddTaskForm({ onTaskAdded }) {
     e.preventDefault();
     if (!title.trim()) return;
 
-    axios.post('http://todo-list-env.eba-ny4hgubn.us-west-2.elasticbeanstalk.com/todos/', { title })
+    axios.post(`${BASE_URL}/todos/`, { title })
       .then(response => {
         onTaskAdded(response.data);
         setTitle('');
